@@ -69,8 +69,6 @@ public class DAO {
     } catch (SQLException ex) {
       System.out.println(ex.getMessage());
       throw ex;
-    } finally {
-      CloseConnection();
     }
   }
 }

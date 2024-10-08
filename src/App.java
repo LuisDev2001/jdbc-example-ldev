@@ -1,68 +1,37 @@
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.util.List;
+import entity.Client;
+import persistance.ClientDAO;
+import persistance.ProductDAO;
 
 public class App {
     public static void main(String[] args) throws Exception {
         System.out.println("Hello, World!");
-    }
+        // ClientDAO clientDAO = new ClientDAO();
+        // clientDAO.createClient(new Client(20, "Dina", "Abismael", "Gonzalez",
+        // "1234567890", "1234567890", "CDMX",
+        // "CDMX", "Mexico", "12345", 1, 1000.00));
 
-    public static void getClients(Connection conn) {
-        String query = "SELECT nombre_contacto, apellido_contacto, telefono FROM cliente";
-        try (Statement stmt = conn.createStatement();
-                ResultSet rs = stmt.executeQuery(query)) {
+        // clientDAO.createClient(new Client(21, "Empresa ABC", "Carlos", "Martinez",
+        // "0987654321", "0987654321",
+        // "Guadalajara", "Jalisco", "Mexico", "54321", 2, 5000.00));
 
-            int count = 0;
-            StringBuilder result = new StringBuilder("Clientes:\n");
+        // List<Client> myClients = clientDAO.getClients();
 
-            while (rs.next()) {
-                String nombre = rs.getString("nombre_contacto");
-                String apellido = rs.getString("apellido_contacto");
-                String telefono = rs.getString("telefono");
-                count++;
-                result.append(count).append(" - ").append(nombre).append(" ").append(apellido).append(" - ")
-                        .append(telefono).append("\n");
-            }
+        // System.out.println("Clients:");
+        // if (myClients != null) {
+        // for (Client client : myClients) {
+        // System.out.println(client.getIdCliente() + " " + client.getNombreCliente() +
+        // " " + client.getPais());
+        // }
+        // }
 
-            System.out.println(result.toString());
+        // Client client = clientDAO.searchClientById(1);
+        // if (client != null) {
+        // System.out.println(client.getIdCliente() + " " + client.getNombreCliente() +
+        // " " + client.getPais());
+        // }
 
-        } catch (SQLException e) {
-            System.err.println("Error en la consulta: " + e.getMessage());
-        }
-    }
-
-    public static void getOrdersByClientId(Connection conn, int id) {
-        String query = "SELECT id_pedido, fecha_pedido FROM pedido WHERE id_cliente = " + id;
-        try {
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(query);
-            StringBuilder result = new StringBuilder("Ordenes del cliente:\n" + id + "\n");
-            while (rs.next()) {
-                int id_pedido = rs.getInt("id_pedido");
-                String fecha_pedido = rs.getString("fecha_pedido");
-                result.append(id_pedido).append(" - ").append(fecha_pedido).append("\n");
-            }
-            System.out.println(result.toString());
-        } catch (SQLException e) {
-            System.err.println("Error en la consulta: " + e.getMessage());
-        }
-    }
-
-    public static void getOrdersByState(Connection conn, String state) {
-        String query = "SELECT id_pedido, fecha_pedido FROM pedido WHERE estado = " + "'" + state + "'";
-        try {
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(query);
-            StringBuilder result = new StringBuilder("Pedidos con estado:\n" + state + "\n");
-            while (rs.next()) {
-                int id_pedido = rs.getInt("id_pedido");
-                String fecha_pedido = rs.getString("fecha_pedido");
-                result.append(id_pedido).append(" - ").append(fecha_pedido).append("\n");
-            }
-            System.out.println(result.toString());
-        } catch (SQLException e) {
-            System.err.println("Error en la consulta: " + e.getMessage());
-        }
+        // ProductDAO productDAO = new ProductDAO();
+        // productDAO.DeleteProduct(50);
     }
 }
