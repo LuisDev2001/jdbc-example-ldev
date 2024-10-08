@@ -1,7 +1,9 @@
 import java.util.List;
 import entity.Client;
+import entity.Order;
 import persistance.ClientDAO;
 import persistance.ProductDAO;
+import persistance.OrderDAO;
 
 public class App {
     public static void main(String[] args) throws Exception {
@@ -33,5 +35,28 @@ public class App {
 
         // ProductDAO productDAO = new ProductDAO();
         // productDAO.DeleteProduct(50);
+
+        OrderDAO orderDAO = new OrderDAO();
+        List<Order> orders = orderDAO.GetOrderDetails(5);
+        List<Order> ordersRejected = orderDAO.GetOrderByState("Rechazado");
+
+        if (orders != null) {
+            System.out.println("Orders:");
+            for (Order order : orders) {
+                System.out.println(order.getIdPedido() + " " + order.getIdCliente() + " " + order.getEstado() + " "
+                        + order.getComentarios());
+            }
+        }
+
+        System.out.println("-------------------");
+
+        if (ordersRejected != null) {
+            System.out.println("Orders rejected:");
+            for (Order order : ordersRejected) {
+                System.out.println(order.getIdPedido() + " " + order.getIdCliente() + " " + order.getEstado() + " "
+                        + order.getComentarios());
+            }
+
+        }
     }
 }
