@@ -47,11 +47,18 @@ public class ClientService {
 
   public List<Client> listClients() throws Exception {
     List<Client> clients = clientDAO.getClients();
-    System.out.println("Clients listed");
+    if (clients == null || clients.isEmpty()) {
+      System.out.println("No clients found");
+    } else {
+      System.out.println("Clients listed");
+    }
     return clients;
   }
 
   public Client getClientById(int idClient) throws Exception {
+    if (idClient <= 0) {
+      throw new IllegalArgumentException("Client ID must be greater than zero");
+    }
     Client client = clientDAO.searchClientById(idClient);
     System.out.println("Client found");
     return client;
