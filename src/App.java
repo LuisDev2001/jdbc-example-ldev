@@ -1,9 +1,6 @@
 import java.util.List;
 import entity.Client;
-import entity.Order;
-import persistance.ClientDAO;
-import persistance.ProductDAO;
-import persistance.OrderDAO;
+import service.ClientService;
 
 public class App {
     public static void main(String[] args) throws Exception {
@@ -36,27 +33,46 @@ public class App {
         // ProductDAO productDAO = new ProductDAO();
         // productDAO.DeleteProduct(50);
 
-        OrderDAO orderDAO = new OrderDAO();
-        List<Order> orders = orderDAO.GetOrderDetails(5);
-        List<Order> ordersRejected = orderDAO.GetOrderByState("Rechazado");
+        // OrderDAO orderDAO = new OrderDAO();
+        // List<Order> orders = orderDAO.GetOrderDetails(5);
+        // List<Order> ordersRejected = orderDAO.GetOrderByState("Rechazado");
 
-        if (orders != null) {
-            System.out.println("Orders:");
-            for (Order order : orders) {
-                System.out.println(order.getIdPedido() + " " + order.getIdCliente() + " " + order.getEstado() + " "
-                        + order.getComentarios());
-            }
+        // if (orders != null) {
+        // System.out.println("Orders:");
+        // for (Order order : orders) {
+        // System.out.println(order.getIdPedido() + " " + order.getIdCliente() + " " +
+        // order.getEstado() + " "
+        // + order.getComentarios());
+        // }
+        // }
+
+        // System.out.println("-------------------");
+
+        // if (ordersRejected != null) {
+        // System.out.println("Orders rejected:");
+        // for (Order order : ordersRejected) {
+        // System.out.println(order.getIdPedido() + " " + order.getIdCliente() + " " +
+        // order.getEstado() + " "
+        // + order.getComentarios());
+        // }
+
+        // }
+        ClientService clientService = new ClientService();
+        // clientService.addClient(22, "Empresa XYZ", "Juan", "Perez", "0987654321",
+        // "0987654321", "Monterrey",
+        // "Nuevo Leon",
+        // "Mexico", "54321", 3, 5000.00);
+
+        List<Client> clients = clientService.listClients();
+        for (Client client : clients) {
+            System.out.println(client.getIdCliente() + " " + client.getNombreCliente() +
+                    " " + client.getPais());
         }
 
-        System.out.println("-------------------");
-
-        if (ordersRejected != null) {
-            System.out.println("Orders rejected:");
-            for (Order order : ordersRejected) {
-                System.out.println(order.getIdPedido() + " " + order.getIdCliente() + " " + order.getEstado() + " "
-                        + order.getComentarios());
-            }
-
+        Client client = clientService.getClientById(1);
+        if (client != null) {
+            System.out.println(client.getIdCliente() + " " + client.getNombreCliente() +
+                    " " + client.getPais());
         }
     }
 }
