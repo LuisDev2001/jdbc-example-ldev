@@ -1,6 +1,8 @@
 import java.util.List;
 import entity.Client;
+import entity.Order;
 import service.ClientService;
+import service.OrderService;
 
 public class App {
     public static void main(String[] args) throws Exception {
@@ -57,22 +59,26 @@ public class App {
         // }
 
         // }
-        ClientService clientService = new ClientService();
+        // ClientService clientService = new ClientService();
+        OrderService orderService = new OrderService();
         // clientService.addClient(22, "Empresa XYZ", "Juan", "Perez", "0987654321",
         // "0987654321", "Monterrey",
         // "Nuevo Leon",
         // "Mexico", "54321", 3, 5000.00);
 
-        List<Client> clients = clientService.listClients();
-        for (Client client : clients) {
-            System.out.println(client.getIdCliente() + " " + client.getNombreCliente() +
-                    " " + client.getPais());
-        }
+        // List<Client> clients = clientService.listClients();
+        // for (Client client : clients) {
+        // System.out.println(client.getIdCliente() + " " + client.getNombreCliente() +
+        // " " + client.getPais());
+        // }
 
-        Client client = clientService.getClientById(1);
-        if (client != null) {
-            System.out.println(client.getIdCliente() + " " + client.getNombreCliente() +
-                    " " + client.getPais());
-        }
+        // Client client = clientService.getClientById(1);
+        // if (client != null) {
+        // System.out.println(client.getIdCliente() + " " + client.getNombreCliente() +
+        // " " + client.getPais());
+        // }
+
+        orderService.addOrder(41, 41, "2023-10-01", "2023-10-01", "2023-10-10", "Pendiente",
+                "No se entrego el pedido", 7);
     }
 }

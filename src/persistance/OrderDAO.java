@@ -52,4 +52,29 @@ public class OrderDAO extends DAO {
 
     return orders;
   }
+
+  public void createOrder(Order order) throws Exception {
+    if (order == null) {
+      System.out.println("Order is null.");
+      return;
+    }
+    // Create a new order
+    // Insert the order into the database
+    String query = "INSERT INTO pedido (id_pedido, codigo_pedido, fecha_pedido, fecha_esperada, fecha_entrega, estado, comentarios, id_cliente) "
+        +
+        "VALUES (" +
+        order.getIdPedido() + ", " +
+        order.getCodigoPedido() + ", '" +
+        order.getFechaPedido() + "', '" +
+        order.getFechaEsperada() + "', '" +
+        order.getFechaEntrega() + "', '" +
+        order.getEstado() + "', '" +
+        order.getComentarios() + "', " +
+        order.getIdCliente() + ")";
+
+    System.out.println(query);
+
+    createEditDeleteFromDB(query);
+    System.out.println("Order has been created.");
+  }
 }
